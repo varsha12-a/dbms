@@ -1,0 +1,133 @@
+-- 1) Create Tables
+
+CREATE TABLE Person (
+    driver_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    address VARCHAR(100)
+);
+
+CREATE TABLE Car (
+    license VARCHAR(20) PRIMARY KEY,
+    model VARCHAR(50),
+    year INT
+);
+
+CREATE TABLE Accident (
+    report_no INT PRIMARY KEY,
+    date_acc DATE,
+    location VARCHAR(100)
+);
+
+CREATE TABLE Owns (
+    driver_id INT,
+    license VARCHAR(20),
+    PRIMARY KEY (driver_id, license),
+    FOREIGN KEY (driver_id) REFERENCES Person(driver_id),
+    FOREIGN KEY (license) REFERENCES Car(license)
+);
+
+CREATE TABLE Participated (
+    driver_id INT,
+    model VARCHAR(50),
+    report_no INT,
+    damage_amount DECIMAL(10,2),
+    PRIMARY KEY (driver_id, report_no),
+    FOREIGN KEY (driver_id) REFERENCES Person(driver_id)
+);
+
+
+
+-- 2) Insert 5 records into each table
+
+INSERT INTO Person VALUES
+(1, 'Rahul', 'Mumbai'),
+(2, 'Amit', 'Pune'),
+(3, 'Sneha', 'Delhi'),
+(4, 'Priya', 'Nashik'),
+(5, 'Karan', 'Chennai');
+
+INSERT INTO Car VALUES
+('MH01A101', 'Honda City', 2020),
+('MH02B202', 'Hyundai i20', 2019),
+('DL03C303', 'Swift', 2021),
+('TN04D404', 'Creta', 2022),
+('MH05E505', 'Baleno', 2018);
+
+INSERT INTO Accident VALUES
+(1001, '2024-01-10', 'Mumbai'),
+(1002, '2024-02-15', 'Pune'),
+(1003, '2024-03-20', 'Delhi'),
+(1004, '2024-04-05', 'Nashik'),
+(1005, '2024-05-12', 'Chennai');
+
+INSERT INTO Owns VALUES
+(1, 'MH01A101'),
+(2, 'MH02B202'),
+(3, 'DL03C303'),
+(4, 'TN04D404'),
+(5, 'MH05E505');
+
+INSERT INTO Participated VALUES
+(1, 'Honda City', 1001, 5000),
+(2, 'Hyundai i20', 1002, 3000),
+(3, 'Swift', 1003, 7000),
+(4, 'Creta', 1004, 2500),
+(5, 'Baleno', 1005, 4000);
+
+
+
+-- 3) Display the Schema of each table
+
+DESC Person;
+DESC Car;
+DESC Accident;
+DESC Owns;
+DESC Participated;
+
+
+
+-- 4) Display all records from Person table
+
+SELECT * FROM Person;
+
+
+
+
+-- 5) Set Foreign Key from Participated.report_no 
+--    to Accident.report_no
+
+ALTER TABLE Participated
+ADD CONSTRAINT fk_report
+FOREIGN KEY (report_no)
+REFERENCES Accident(report_no);
+
+
+
+-- 6) Add check constraint on damage_amount 
+--    so it should not be negative
+
+ALTER TABLE Participated
+ADD CONSTRAINT chk_damage
+CHECK (damage_amount >= 0);
+
+
+-- 7) Make name column in Person table NOT NULL
+
+ALTER TABLE Person
+MODIFY name VARCHAR(50) NOT NULL;
+
+
+-- 8) Rename Car table to Vehicle
+
+ALTER TABLE Car
+RENAME TO Vehicle;
+
+
+-- 9) Create new_person table from Person table
+
+CREATE TABLE new_person AS
+SELECT * FROM Person;
+
+-- Drop the new_person table
+
+DROP TABLE new_person;

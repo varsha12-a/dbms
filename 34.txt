@@ -1,0 +1,46 @@
+1-
+select employee_name
+from works
+where company_name='First Bank Corporation';
+
+2-
+select e.employee_name, e.city
+from employee e, works w
+where e.employee_name=w.employee_name
+and w.company_name='First Bank Corporation';
+
+3-
+select e.employee_name, e.street, e.city
+from employee e, works w
+where e.employee_name=w.employee_name
+and w.company_name='First Bank Corporation'
+and w.salary>10000;
+
+4-
+select e.employee_name
+from employee e, works w, company c
+where e.employee_name=w.employee_name
+and w.company_name=c.company_name
+and e.city=c.city;
+
+5-
+select e.employee_name
+from employee e, employee m, manages mg
+where e.employee_name=mg.employee_name
+and mg.manager_name=m.employee_name
+and e.city=m.city
+and e.street=m.street;
+
+6-
+select employee_name
+from works
+where company_name!='First Bank Corporation';
+
+7-
+update works
+set salary=salary+salary*0.10
+where company_name='First Bank Corporation';
+
+8-
+delete from works
+where company_name='Small Bank Corporation';

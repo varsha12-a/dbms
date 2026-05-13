@@ -1,0 +1,85 @@
+CREATE TABLE Employee (
+    EMPLOYEE_ID NUMBER(6) PRIMARY KEY,
+
+    FIRST_NAME VARCHAR2(20),
+
+    LAST_NAME VARCHAR2(25) NOT NULL,
+
+    EMAIL VARCHAR2(25) NOT NULL UNIQUE,
+
+    PHONE_NUMBER VARCHAR2(20),
+
+    HIRE_DATE DATE NOT NULL,
+
+    JOB_ID VARCHAR2(10) NOT NULL,
+
+    SALARY NUMBER(8,2)
+        CHECK (SALARY > 0),
+
+    COMMISSION_PCT NUMBER(2,2),
+
+    MANAGER_ID NUMBER(6),
+
+    DEPARTMENT_ID NUMBER(4)
+);
+
+
+INSERT INTO Employee VALUES
+(101,'Amit','Sharma','amit@gmail.com','9876543210',
+TO_DATE('10-01-2020','DD-MM-YYYY'),
+'IT_PROG',50000,0.10,201,10);
+
+INSERT INTO Employee VALUES
+(102,'Neha','Patil','neha@gmail.com','9876543211',
+TO_DATE('12-02-2021','DD-MM-YYYY'),
+'HR_EXEC',40000,0.05,202,20);
+
+INSERT INTO Employee VALUES
+(103,'Rahul','Joshi','rahul@gmail.com','9876543212',
+TO_DATE('15-03-2022','DD-MM-YYYY'),
+'IT_PROG',70000,0.08,201,10);
+
+INSERT INTO Employee VALUES
+(104,'Vaishali','Deshmukh','vaishali@gmail.com','9876543213',
+TO_DATE('20-04-2022','DD-MM-YYYY'),
+'MANAGER',90000,0.12,203,30);
+
+INSERT INTO Employee VALUES
+(105,'Seema','Kulkarni','seema@gmail.com','9876543214',
+TO_DATE('11-06-2023','DD-MM-YYYY'),
+'HR_EXEC',30000,0.04,202,20);
+
+
+
+1
+SELECT
+MAX(SALARY) AS Highest_Salary,
+MIN(SALARY) AS Lowest_Salary,
+SUM(SALARY) AS Total_Salary,
+AVG(SALARY) AS Average_Salary
+FROM Employee;
+
+
+2
+SELECT JOB_ID,
+COUNT(*) AS Number_of_Employees
+FROM Employee
+GROUP BY JOB_ID;
+
+3
+SELECT COUNT(DISTINCT MANAGER_ID) AS Number_of_Managers
+FROM Employee;
+
+4
+
+SELECT
+MAX(SALARY) - MIN(SALARY) AS DIFFERENCE
+FROM Employee;
+
+5
+SELECT
+MANAGER_ID,
+MIN(SALARY) AS Lowest_Salary
+FROM Employee
+GROUP BY MANAGER_ID;
+

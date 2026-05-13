@@ -1,0 +1,21 @@
+1-
+update company
+set city='Pune'
+where cname='ABC';
+
+2-
+update works
+set sal=sal+sal*0.10
+where cname='Mbank'
+and sal<=20000;
+
+3-
+select ename
+from works
+where cname='Bosch'
+and city='Pune';
+
+4-
+delete from works
+where cname='SBC Company'
+and sal>50000;

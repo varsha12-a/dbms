@@ -1,0 +1,67 @@
+1-
+select employee_name
+from works
+where salary > all
+(
+select salary
+from works
+where company_name='Small Bank Corporation'
+);
+
+2-
+select distinct c1.company_name
+from company c1
+where c1.city in
+(
+select city
+from company
+where company_name='Small Bank Corporation'
+);
+
+3-
+select employee_name
+from works w
+where salary >
+(
+select avg(salary)
+from works
+where company_name=w.company_name
+);
+
+4-
+select company_name
+from works
+group by company_name
+having count(*)=
+(
+select max(count(*))
+from works
+group by company_name
+);
+
+5-
+select company_name
+from works
+group by company_name
+having sum(salary)=
+(
+select min(sum(salary))
+from works
+group by company_name
+);
+
+6-
+select company_name
+from works
+group by company_name
+having avg(salary)>
+(
+select avg(salary)
+from works
+where company_name='First Bank Corporation'
+);
+
+7-
+update employee
+set city='Newtown'
+where employee_name='Jones';

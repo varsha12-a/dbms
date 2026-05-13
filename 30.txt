@@ -1,0 +1,40 @@
+1-
+use product_detail
+
+2-
+show dbs
+
+3-
+db.createCollection("product")
+
+4-
+show collections
+
+5-
+db.product.insertMany([
+{item:"pen",price:10,quantity:2},
+{item:"book",price:50,quantity:1},
+{item:"pen",price:10,quantity:5},
+{item:"pencil",price:5,quantity:10}
+])
+
+6-
+db.product.find()
+
+7-
+db.product.createIndex(
+{item:1}
+)
+
+8-
+db.product.getIndexes()
+
+9-
+db.product.createIndex(
+{price:1,quantity:-1}
+)
+
+10-
+db.product.dropIndex(
+{price:1,quantity:-1}
+)

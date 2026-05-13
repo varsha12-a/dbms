@@ -1,0 +1,54 @@
+select *
+from employees
+where salary >
+(
+select salary
+from employees
+where last_name='allen'
+);
+
+select *
+from employees
+where job_id=
+(
+select job_id
+from employees
+where last_name='martin'
+);
+
+select *
+from employees
+where department_id !=
+(
+select department_id
+from employees
+where last_name='king'
+);
+
+select *
+from employees
+where salary >
+(
+select salary
+from employees
+where last_name='blake'
+);
+
+select *
+from employees
+where hire_date >
+(
+select hire_date
+from employees
+where last_name='jones'
+);
+
+select *
+from employees
+where department_id=
+(
+select department_id
+from employees
+where last_name='clark'
+);
+

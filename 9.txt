@@ -1,0 +1,72 @@
+CREATE TABLE Employee (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50) NOT NULL,
+    department VARCHAR(50) NOT NULL,
+    city VARCHAR(50),
+    salary DECIMAL(10,2)
+        CHECK (salary > 0)
+);
+
+INSERT INTO Employee VALUES
+(101,'Amit','IT','Pune',70000),
+(102,'Neha','HR','Mumbai',45000),
+(103,'Rahul','IT','Pune',65000),
+(104,'Vaishali','Finance','Delhi',80000),
+(105,'Seema','HR','Mumbai',40000),
+(106,'Akash','IT','Pune',72000),
+(107,'Rohan','Sales','Nagpur',35000),
+(108,'Meena','Finance','Delhi',90000),
+(109,'Ajay','Sales','Mumbai',30000),
+(110,'Pooja','IT','Pune',60000);
+
+
+
+1
+SELECT department,
+SUM(salary) AS Total_Salary
+FROM Employee
+GROUP BY department;
+
+
+2
+SELECT department,
+AVG(salary) AS Average_Salary
+FROM Employee
+GROUP BY department;
+
+
+3
+SELECT city,
+COUNT(*) AS Employee_Count
+FROM Employee
+GROUP BY city
+HAVING COUNT(*) > 3;
+
+
+4
+SELECT department,
+MAX(salary) AS Maximum_Salary
+FROM Employee
+GROUP BY department
+HAVING MAX(salary) > 60000;
+
+5
+SELECT department,
+city,
+SUM(salary) AS Total_Salary
+FROM Employee
+GROUP BY department, city;
+
+6
+SELECT department,
+COUNT(*) AS Employee_Count
+FROM Employee
+GROUP BY department
+HAVING COUNT(*) > 1;
+
+7
+SELECT city,
+COUNT(*) AS Employee_Count
+FROM Employee
+GROUP BY city
+ORDER BY Employee_Count DESC;

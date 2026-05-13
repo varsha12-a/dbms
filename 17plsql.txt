@@ -1,0 +1,43 @@
+DECLARE
+    v_empno EMP.EMPNO%TYPE := &EMPNO;
+    v_deptno EMP.DEPTNO%TYPE;
+    v_sal EMP.SAL%TYPE;
+    v_comm EMP.COMM%TYPE;
+
+BEGIN
+
+    -- Fetch department, salary and commission
+    SELECT DEPTNO, SAL, NVL(COMM,0)
+    INTO v_deptno, v_sal, v_comm
+    FROM EMP
+    WHERE EMPNO = v_empno;
+
+    -- Salary update conditions
+    IF v_deptno = 10 THEN
+
+        UPDATE EMP
+        SET SAL = SAL + (SAL * 0.10)
+        WHERE EMPNO = v_empno;
+
+        DBMS_OUTPUT.PUT_LINE('Salary Updated by 10%');
+
+    ELSIF v_deptno = 20 THEN
+
+        UPDATE EMP
+        SET SAL = SAL + (SAL * 0.15)
+        WHERE EMPNO = v_empno;
+
+        DBMS_OUTPUT.PUT_LINE('Salary Updated by 15%');
+
+    ELSE
+
+        UPDATE EMP
+        SET SAL = SAL + NVL(COMM,0)
+        WHERE EMPNO = v_empno;
+
+        DBMS_OUTPUT.PUT_LINE('Salary Updated with SAL + COMM');
+
+    END IF;
+
+END;
+/

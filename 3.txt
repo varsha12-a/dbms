@@ -1,0 +1,85 @@
+CREATE TABLE Department (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(50),
+    location VARCHAR(50)
+);
+
+CREATE TABLE Employee (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    city VARCHAR(50),
+    salary DECIMAL(10,2) DEFAULT 0,
+    department INT,
+
+    FOREIGN KEY (department)
+    REFERENCES Department(dept_id)
+);
+
+1
+DESC Employee;
+
+DESC Department;
+
+2
+INSERT INTO Department VALUES
+(1,'HR','Mumbai'),
+(2,'IT','Pune'),
+(3,'Finance','Delhi'),
+(4,'Marketing','Nashik'),
+(5,'Sales','Nagpur'),
+(6,'Support','Aurangabad'),
+(7,'Admin','Mumbai'),
+(8,'Testing','Pune'),
+(9,'Security','Nagar'),
+(10,'Research','Chennai');
+
+INSERT INTO Employee VALUES
+(101,'Amit','Mumbai',30000,1),
+(102,'Neha','Pune',45000,2),
+(103,'Deepak','Delhi',40000,3),
+(104,'Reena','Nashik',35000,4),
+(105,'Tejas','Nagpur',38000,5),
+(106,'Seema','Aurangabad',42000,6),
+(107,'Ketan','Mumbai',28000,7),
+(108,'Meena','Pune',50000,8),
+(109,'Jeet','Nagar',36000,2),
+(110,'Veena','Chennai',47000,10);
+
+3
+INSERT INTO Department
+VALUES (11,'Operations','Hyderabad');
+
+4
+
+INSERT INTO Employee(emp_id, emp_name, city, department)
+VALUES (111,'Rohan','Pune',2);
+
+5
+UPDATE Employee
+SET salary = salary + (salary * 0.20);
+
+6
+SELECT emp_name,
+       salary * 12 AS annual_salary
+FROM Employee
+WHERE emp_name LIKE '_e%';
+
+7
+UPDATE Employee
+SET city = 'Pune'
+WHERE department = (
+    SELECT dept_id
+    FROM Department
+    WHERE dept_name = 'IT'
+);
+
+
+verification qury
+
+SELECT *
+FROM Employee
+WHERE department = (
+    SELECT dept_id
+    FROM Department
+    WHERE dept_name = 'IT'
+);

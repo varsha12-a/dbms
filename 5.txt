@@ -1,0 +1,32 @@
+1
+CREATE USER 'Class_div_rollno'@'localhost'
+IDENTIFIED BY 'password123';
+
+2
+GRANT SELECT
+ON Employee
+TO 'Class_div_rollno'@'localhost';
+
+3
+GRANT INSERT, UPDATE
+ON Employee
+TO 'Class_div_rollno'@'localhost';
+4
+REVOKE UPDATE
+ON Employee
+FROM 'user1'@'localhost';
+5
+CREATE ROLE manager_role;
+6
+GRANT SELECT, DELETE
+ON Employee
+TO manager_role;
+7
+REVOKE manager_role
+FROM 'user2'@'localhost';
+
+
+
+check granted permission :-
+
+SHOW GRANTS FOR 'Class_div_rollno'@'localhost';

@@ -1,0 +1,79 @@
+CREATE TABLE dept1 (
+    DEPTNO INTEGER PRIMARY KEY,
+    dname VARCHAR2(30) NOT NULL,
+    loc VARCHAR2(30) NOT NULL
+);
+
+2
+ALTER TABLE dept1
+ADD mgr NUMBER;
+
+3
+
+CREATE TABLE empl (
+    empno INTEGER,
+    ename VARCHAR2(20),
+    sal NUMBER(10,2),
+    deptno NUMBER
+);
+
+4
+
+add pk --
+
+
+ALTER TABLE empl
+ADD CONSTRAINT pk_empno
+PRIMARY KEY (empno);
+
+adding not null --
+
+
+
+ALTER TABLE empl
+MODIFY ename VARCHAR2(20) NOT NULL;
+
+chk constraints --
+
+
+
+ALTER TABLE empl
+ADD CONSTRAINT chk_sal
+CHECK (sal > 10000);
+
+
+fk on deptno --
+
+
+ALTER TABLE empl
+ADD CONSTRAINT fk_deptno
+FOREIGN KEY (deptno)
+REFERENCES dept1(DEPTNO);
+
+
+5
+CREATE TABLE dept11 AS
+SELECT *
+FROM dept1;
+
+
+CREATE TABLE emp11 AS
+SELECT *
+FROM empl;
+
+
+6
+ALTER TABLE empl
+ADD address VARCHAR2(30);
+
+
+7
+ALTER TABLE empl
+RENAME COLUMN sal TO salary;
+
+
+8
+SELECT constraint_name,
+       constraint_type
+FROM user_constraints
+WHERE table_name = 'EMPL';
